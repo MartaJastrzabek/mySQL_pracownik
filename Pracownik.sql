@@ -2,7 +2,7 @@ CREATE SCHEMA pracownicy;
 
 -- 1.Tworzy tabelę pracownik(imie, nazwisko, wyplata, data urodzenia, stanowisko). W tabeli mogą być dodatkowe kolumny, które uznasz za niezbędne.
 CREATE TABLE pracownik (
-	id INT auto_increment PRIMARY KEY,
+    id INT auto_increment PRIMARY KEY,
     imie VARCHAR (50),
     nazwisko VARCHAR (50),
     wyplata INT (6),
@@ -14,11 +14,11 @@ CREATE TABLE pracownik (
 
 INSERT INTO pracownik (imie, nazwisko, wyplata, data_urodzenia, stanowisko)
 VALUES ('Jan', 'Kowalski', 5000, '1985-08-14', 'Manager'),
-		('Zofia', 'Nowacka', 15000, '1965-01-01', 'Dyrektor'),
-		('Aldona', 'Zawadzka', 4200, '1982-10-20', 'Sprzedawca'),
-		('Leon', 'Kozioł', 4000, '1990-05-17', 'Sprzedawca'),
-		('Andrzej', 'Nowak', 4500, '1981-06-12', 'Serwisant'),
-		('Mariusz', 'Kowal', 3800, '1991-02-25', 'Kierowca');
+        ('Zofia', 'Nowacka', 15000, '1965-01-01', 'Dyrektor'),
+        ('Aldona', 'Zawadzka', 4200, '1982-10-20', 'Sprzedawca'),
+        ('Leon', 'Kozioł', 4000, '1990-05-17', 'Sprzedawca'),
+        ('Andrzej', 'Nowak', 4500, '1981-06-12', 'Serwisant'),
+        ('Mariusz', 'Kowal', 3800, '1991-02-25', 'Kierowca');
 
 -- 3. Pobiera wszystkich pracowników i wyświetla ich w kolejności alfabetycznej po nazwisku
 
@@ -58,7 +58,7 @@ DROP TABLE pracownik;
 
 -- 9. Tworzy tabelę stanowisko (nazwa stanowiska, opis, wypłata na danym stanowisku)
 CREATE TABLE stanowisko (
-	id_stanowiska INT AUTO_INCREMENT PRIMARY KEY,
+    id_stanowiska INT AUTO_INCREMENT PRIMARY KEY,
     nazwa_stanowiska VARCHAR (50),
     opis VARCHAR (200),
     wyplata INT (6)
@@ -67,9 +67,9 @@ CREATE TABLE stanowisko (
 -- 10. Tworzy tabelę adres (ulica+numer domu/mieszkania, kod pocztowy, miejscowość)
 
 CREATE TABLE adres (
-	id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_pracownika INT(6),
-	ulica_nr_domu_mieszkania VARCHAR (50),
+    ulica_nr_domu_mieszkania VARCHAR (50),
     kod_pocztowy VARCHAR(6),
     miejscowosc VARCHAR(50)
 );
@@ -77,7 +77,7 @@ CREATE TABLE adres (
 -- 11. Tworzy tabelę pracownik (imię, nazwisko) + relacje do tabeli stanowisko i adres
 
 CREATE TABLE pracownik(
-	id_pracownika INT(6) AUTO_INCREMENT PRIMARY KEY,
+    id_pracownika INT(6) AUTO_INCREMENT PRIMARY KEY,
     imie VARCHAR (50),
     nazwisko VARCHAR (50),
     id_stanowiska INT (6)
@@ -91,34 +91,34 @@ JOIN adres a ON p.id_pracownika = a.id_pracownika;
 
 INSERT INTO pracownik (imie, nazwisko, id_stanowiska)
 VALUES ('Jan', 'Kowalski', 3), 
-		('Zofia', 'Nowak', 1), 
-		('Stefan', 'Górski', 2), 
-		('Mariola', 'Zawadzka', 2), 
-		('Celina', 'Kowalik', 5);
+        ('Zofia', 'Nowak', 1), 
+        ('Stefan', 'Górski', 2), 
+        ('Mariola', 'Zawadzka', 2), 
+        ('Celina', 'Kowalik', 5);
 
 INSERT INTO stanowisko (id_stanowiska, nazwa_stanowiska, opis, wyplata)
 VALUES (1, 'IT SUPPORT', 'Rozwiązywanie problemów IT' , 3500), 
-		(2, 'Obsługa klienta', 'Kontakty z klientami' , 3200), 
-		(3, 'Manager', 'Zarządzanie pracownikami', 5000), 
-		(4, 'Księgowy', 'Prowadzenie księgowości firmy', 4000), 
-		(5, 'Kierowca', 'Dostawa zamówień', 3100);
+        (2, 'Obsługa klienta', 'Kontakty z klientami' , 3200), 
+        (3, 'Manager', 'Zarządzanie pracownikami', 5000), 
+        (4, 'Księgowy', 'Prowadzenie księgowości firmy', 4000), 
+        (5, 'Kierowca', 'Dostawa zamówień', 3100);
 
 INSERT INTO adres (id_pracownika, ulica_nr_domu_mieszkania, kod_pocztowy, miejscowosc)
 VALUES (1, 'Nowowiejska 5/2', '53-687', 'Wrocław'),
-		(2, 'Krakowska 22', '53-687', 'Wrocław'),
-		(3, 'Smocza 14', '23-677', 'Krakow'),
-		(4, 'Kacza 7', '45-748', 'Wrocław'),
-		(5, 'Chabrowa 87', '53-654', 'Wroclaw');
+        (2, 'Krakowska 22', '53-687', 'Wrocław'),
+        (3, 'Smocza 14', '23-677', 'Krakow'),
+        (4, 'Kacza 7', '45-748', 'Wrocław'),
+        (5, 'Chabrowa 87', '53-654', 'Wroclaw');
    
 -- 13. Pobiera pełne informacje o pracowniku (imię, nazwisko, adres, stanowisko)
 
 SELECT 
-	p.imie, 
-	p.nazwisko, 
-	a.ulica_nr_domu_mieszkania, 
-	a.kod_pocztowy, 
-	a.miejscowosc, 
-	s.nazwa_stanowiska 
+        p.imie, 
+        p.nazwisko, 
+        a.ulica_nr_domu_mieszkania, 
+        a.kod_pocztowy, 
+        a.miejscowosc, 
+        s.nazwa_stanowiska 
 FROM pracownik p
 JOIN adres a ON p.id_pracownika = a.id_pracownika
 JOIN stanowisko s ON p.id_stanowiska = s.id_stanowiska;
